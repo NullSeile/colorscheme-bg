@@ -2,9 +2,9 @@ cd ~/dev/background
 
 theme=`noctalia msg color-scheme-get | cut -d' ' -f2- | tr '[:upper:]' '[:lower:]' | tr ' ' '-'`
 mode=`noctalia msg theme-mode-get`
-gen_mode=light
+gen_mode=dark
 if [ "$mode" = "dark" ]; then
-    gen_mode=dark
+    gen_mode=light
 fi
 
 file="$HOME/dev/background/bg/$theme-$gen_mode.png"

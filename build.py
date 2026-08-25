@@ -77,12 +77,13 @@ def generate(imgs, c: Colors):
 
         res = alpha * color + (1 - alpha) * res
 
-    res = multiply(res, c.shadow, imgs[Path("./out/fx/18-shadows.png")])
-    res = add(res, c.yellow, imgs[Path("./out/fx/19-window-hl.png")])
-    res = multiply(res, c.shadow, imgs[Path("./out/fx/20-ao.png")])
-    res = screen(res, c.blue, imgs[Path("./out/fx/21-screen.png")])
-    res = soft_light(res, c.yellow, imgs[Path("./out/fx/22-bloom-yellow.png")])
-    res = soft_light(res, c.blue, imgs[Path("./out/fx/23-bloom-blue.png")])
+    res = multiply(res, c.shadow, imgs[Path("./out/fx/18-shadows.png")] * 0.35)
+    res = soft_light(res, c.yellow, imgs[Path("./out/fx/19-window-hl.png")] * 1)
+    res = multiply(res, c.shadow, imgs[Path("./out/fx/20-ao.png")] * 0.25)
+    res = screen(res, c.blue, imgs[Path("./out/fx/21-screen.png")] * 0.12)
+    res = soft_light(res, c.yellow, imgs[Path("./out/fx/22-bloom-yellow.png")] * 0.6)
+    res = soft_light(res, c.blue, imgs[Path("./out/fx/23-bloom-blue.png")] * 0.8)
+    # res = soft_light(res, c.blue, imgs[Path("./out/fx/23-bloom-blue.png")]*8)
 
     la = add(hex("#000000"), c.lightest, imgs[Path("./out/fx/25-lineart-hl.png")])
     res = blend(la, res, imgs[Path("./out/fx/24-lineart.png")])
