@@ -83,10 +83,18 @@ def generate(imgs, c: Colors):
     res = screen(res, c.blue, imgs[Path("./out/fx/21-screen.png")] * 0.12)
     res = soft_light(res, c.yellow, imgs[Path("./out/fx/22-bloom-yellow.png")] * 0.6)
     res = soft_light(res, c.blue, imgs[Path("./out/fx/23-bloom-blue.png")] * 0.8)
-    # res = soft_light(res, c.blue, imgs[Path("./out/fx/23-bloom-blue.png")]*8)
 
     la = add(hex("#000000"), c.lightest, imgs[Path("./out/fx/25-lineart-hl.png")])
+
+    noise = cv2.imread("./out/fx/26-noise.png", cv2.IMREAD_COLOR_RGB)
+    assert noise is not None
+    noise = noise[:,:,:] / 255
+    noise = (noise - 0.5) * 0.06 + 1
+
+    res = np.clip(res * noise, 0, 1)
+
     res = blend(la, res, imgs[Path("./out/fx/24-lineart.png")])
+
     return res
 
 theme = sys.argv[1]
